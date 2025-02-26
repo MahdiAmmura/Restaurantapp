@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speisekarte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('https://ucac0ac6671ae81ad639ea379d81.previews.dropboxusercontent.com/p/thumb/AChgcgdnqhDZ7IJrQ88hYJptWeT9tdS_A_xrRX5DSzdms3yOLZF2IOt6lxfXxR-nvYFcpOKXslcK75naBHr5UjwCmQcPFXPUozeoEWdu6iB7vGRxEsiZsnPl-MQtuSdRIRDX5W24kZHH1JfRVcT2CDRHBak3PBY_L0vC4xw2ose1RrqIBFRPLtTEKW9pP_3GnSC4PAnfuMjOd4FuurpcwDUJkY3JTKXteAMW7pLRwT680vqjWyMpzZdvnQISywRaXdbPOvIiccxqaif4rvIh5q3NrwR6aMgI8VdK025slbDzVtSflG2nTWIz7or-siP5XbFvfojAYLRPWK2WyYR6LQ4Y-d_NvnYVt9wgZzc0ycoBYp3Oj84nb_Rx2l7vmKu_fGrQ6GPRAuNwIpojY3x_tm7o/p.jpeg');
+            background-size: cover;
+            text-align: center;
+        }
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            color: #3F3D2F;
+            margin: 20px 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        .menu-container {
+            background: rgba(244, 241, 234, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .menu-category {
+            margin-bottom: 20px;
+        }
+        .menu-category h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #3F3D2F;
+            margin-bottom: 10px;
+        }
+        .menu-item {
+            background: #E8E5DA;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: #3F3D2F;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+        .menu-item span {
+            display: block;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #555;
+            margin-top: 5px;
+        }
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 36px;
+            }
+            .menu-container {
+                width: 90%;
+                padding: 15px;
+            }
+            .menu-category h3 {
+                font-size: 24px;
+            }
+            .menu-item {
+                font-size: 20px;
+            }
+            .menu-item span {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>unsere Speisekarte</h2>
+    <div class="menu-container">
+        <div class="menu-category">
+            <h3>Vorspeisen</h3>
+            <div class="menu-item" id="item1">Caesar Salad <span>Frischer Salat mit Hähnchen, Croutons und Dressing</span> <span class="price">9.00 €</span></div>
+        </div>
+        <div class="menu-category">
+            <h3>Hauptspeisen</h3>
+            <div class="menu-item" id="item2">Spaghetti Bolognese <span>Klassische Pasta mit herzhafter Fleischsauce</span> <span class="price">12.50 €</span></div>
+            <div class="menu-item" id="item3">Grillplatte <span>Gegrilltes Fleisch mit saisonalem Gemüse</span> <span class="price">15.00 €</span></div>
+            <div class="menu-item" id="item4">Pizza Margherita <span>Traditionelle Pizza mit Tomaten und Mozzarella</span> <span class="price">8.50 €</span></div>
+            <div class="menu-item" id="item5">Schnitzel mit Pommes <span>Knuspriges Schnitzel mit goldbraunen Pommes</span> <span class="price">11.00 €</span></div>
+            <div class="menu-item" id="item6">Lachsfilet mit Gemüse <span>Zartes Lachsfilet auf gedünstetem Gemüse</span> <span class="price">14.00 €</span></div>
+        </div>
+        <div class="menu-category">
+            <h3>Desserts</h3>
+            <div class="menu-item" id="item7">Apfelstrudel <span>Warmer Apfelstrudel mit Vanillesauce</span> <span class="price">6.00 €</span></div>
+            <div class="menu-item" id="item8">Schokoladenkuchen <span>Reichhaltiger Schokoladenkuchen mit Sahne</span> <span class="price">7.00 €</span></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const itemName = item.childNodes[0].textContent.trim();
+                    const itemDescription = item.querySelector('span').textContent.trim();
+                    const itemPrice = item.querySelector('.price').textContent.trim().split(' ')[0];
+                    const cartItem = { name: itemName, description: itemDescription, price: itemPrice, quantity: 1 };
+
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingItemIndex = cart.findIndex(i => i.name === cartItem.name);
+
+                    if (existingItemIndex > -1) {
+                        cart[existingItemIndex].quantity++;
+                    } else {
+                        cart.push(cartItem);
+                    }
+
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
